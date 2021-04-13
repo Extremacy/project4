@@ -91,14 +91,14 @@ public class CheckerPiece extends JComponent {
             g.setColor(Color.green);
             g.fillRect(0, 0, SQUARE_LENGTH - 1, SQUARE_LENGTH - 1);
             g.setColor(Color.black);
-            g.fillOval(0, 0, CHECKER_LENGTH, CHECKER_LENGTH);
+            g.fillOval(10, 10, CHECKER_LENGTH, CHECKER_LENGTH);
         } else if (status == 'r') {
             g.setColor(Color.black);
             g.fillRect(0, 0, SQUARE_LENGTH, SQUARE_LENGTH);
             g.setColor(Color.green);
             g.fillRect(0, 0, SQUARE_LENGTH - 1, SQUARE_LENGTH - 1);
             g.setColor(Color.red);
-            g.fillOval(0, 0, CHECKER_LENGTH, CHECKER_LENGTH);
+            g.fillOval(10, 10, CHECKER_LENGTH, CHECKER_LENGTH);
         }
     }
 }
