@@ -1,46 +1,36 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class CheckerBoard extends JPanel {
-    /*
-    public static void main(String[] args) {
-        char[][] test = new char[][] {
-                {'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'},
-                {'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a'},
-                {'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'},
-                {'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a'},
-                {'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'},
-                {'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a'},
-                {'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'},
-                {'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a'}
+    private char[][] boardStatus;
+    private final int ROW = 8, COLUMN = 8;
+    private JPanel panel;
+    private GridLayout gridLayout;
+
+    public CheckerBoard(char[][] boardStatus) throws IllegalCheckerboardArgumentException {
+        boardStatus = new char[][] {
+            {'e', 'b', 'e', 'b', 'e', 'b', 'e', 'b'},
+            {'b', 'e', 'b', 'e', 'b', 'e', 'b', 'e'},
+            {'e', 'b', 'e', 'b', 'e', 'b', 'e', 'b'},
+            {'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'},
+            {'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'},
+            {'r', 'e', 'r', 'e', 'r', 'e', 'r', 'e'},
+            {'e', 'r', 'e', 'r', 'e', 'r', 'e', 'r'},
+            {'r', 'e', 'r', 'e', 'r', 'e', 'r', 'e'}
         };
-        for (char[] c: test
+
+        gridLayout = new GridLayout(8, 8);
+        panel = new JPanel(gridLayout);
+        int rowCounter = 0;
+        int columnCounter = 0;
+        for (char[] c: boardStatus
              ) {
             for (char x: c
                  ) {
-                System.out.print(x + " ");
+                CheckerPiece currentPiece = new CheckerPiece(rowCounter, columnCounter, x);
+                columnCounter++;
             }
-            System.out.println();
-        }
-    }
-    */
-
-    private char[][] boardStatus;
-    private final int ROW = 8, COLUMN = 8;
-
-    public CheckerBoard(char[][] boardStatus) {
-        boardStatus = new char[COLUMN][ROW];
-        for (int i = 0; i < COLUMN; i++) {
-            if (i % 2 == 0) {
-                boardStatus[i][0] = 'e';
-                boardStatus[i][2] = 'e';
-                boardStatus[i][4] = 'e';
-                boardStatus[i][6] = 'e';
-            } else {
-                boardStatus[i][1] = 'e';
-                boardStatus[i][3] = 'e';
-                boardStatus[i][5] = 'e';
-                boardStatus[i][7] = 'e';
-            }
+            rowCounter++;
         }
     }
 }

@@ -4,12 +4,26 @@ import java.awt.*;
 public class CheckerPiece extends JComponent {
     private char status;
     private int row, column;
+    private boolean isPlayable;
     private final int SQUARE_LENGTH = 60, CHECKER_LENGTH = 40;
 
     public CheckerPiece(int row, int column, char status) throws IllegalCheckerboardArgumentException {
         this.setRow(row);
         this.setColumn(column);
         this.setStatus(status);
+        if (column % 2 == 0) {
+            if (row % 2 == 0) {
+                this.setPlayable(false);
+            } else {
+                this.setPlayable(true);
+            }
+        } else {
+            if (row % 2 == 0) {
+                this.setPlayable(true);
+            } else {
+                this.setPlayable(false);
+            }
+        }
     }
 
     public char getStatus() {
@@ -17,7 +31,7 @@ public class CheckerPiece extends JComponent {
     }
 
     public void setStatus(char status) throws IllegalCheckerboardArgumentException {
-        if (this.status == 'e' && (status == 'r' || status == 'b')) {
+        if (this.status == 'e' && !this.isPlayable) {
             throw new IllegalCheckerboardArgumentException("You cannot place a piece on a white square.");
         } else if (status == 'e'){
             this.status = status;
@@ -56,11 +70,20 @@ public class CheckerPiece extends JComponent {
 
     }
 
+    public void setPlayable(boolean playable) {
+        isPlayable = playable;
+    }
+
     public void paintComponent(Graphics g) {
-        if (status == 'e') {
+        if (status == 'e' && !isPlayable) {
             g.setColor(Color.black);
             g.fillRect(0, 0, SQUARE_LENGTH, SQUARE_LENGTH);
             g.setColor(Color.white);
+            g.fillRect(0, 0, SQUARE_LENGTH - 1, SQUARE_LENGTH - 1);
+        } else if (status == 'e' && isPlayable) {
+            g.setColor(Color.black);
+            g.fillRect(0, 0, SQUARE_LENGTH, SQUARE_LENGTH);
+            g.setColor(Color.green);
             g.fillRect(0, 0, SQUARE_LENGTH - 1, SQUARE_LENGTH - 1);
         } else if (status == 'b') {
             g.setColor(Color.black);
